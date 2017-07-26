@@ -7,7 +7,11 @@ ENV ENV_APP=$USR_LOCAL/app
 
 ENV GOSU_VERSION 1.9
 RUN set -x \
-    && apt-get update && apt-get install -y git ca-certificates wget && rm -rf /var/lib/apt/lists/* \
+    && apt-get update \
+    && apt-get install -y software-properties-common python-software-properties  \
+    && apt-add-repository ppa:git-core/ppa -y \
+    && apt-get update \
+    && apt-get install -y git ca-certificates wget && rm -rf /var/lib/apt/lists/* \
     && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
     && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
     && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc" \
