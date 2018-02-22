@@ -1,4 +1,4 @@
-FROM swift:3.1
+FROM swift:4.0.3
 
 ENV VERSION 1.0
 ENV DOCKER_USER="swifter"
